@@ -5,6 +5,8 @@ It will have a crime scene kind of look, allowing you to tie things together asw
 
 Uses Vite + React for the website itelf, Netlify for web hosting and Appwrite for the database.
 
+Email corkweb@googlegroups.com for support.
+
 
 REMOVE WHEN COMPLETE:
 
