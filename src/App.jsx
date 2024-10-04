@@ -4,6 +4,13 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Client } from 'appwrite';
 
+
+const client = new Client();
+
+client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('66fff6c50032a76aa298');
+    
 function App() {
   const [count, setCount] = useState(0)
 
