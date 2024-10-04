@@ -1,17 +1,22 @@
+// Default React Assets (TO BE REMOVED)
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+
+// Import CSS
 import './App.css'
+
+// Appwrite import and credentials
 import { Client } from 'appwrite';
-
-
 const client = new Client();
-
 client
     .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('66fff6c50032a76aa298');
     
-function App() {
+
+
+
+    function App() {
   const [count, setCount] = useState(0)
 
   return (
