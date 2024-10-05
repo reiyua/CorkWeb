@@ -155,7 +155,7 @@ function App() {
 
       {/* Copyright Blurb */}
       <div className="copyright">
-        <p>&copy; 2024 reiyua. All rights reserved.</p>
+        &copy; <a href="https://reiyua.lol" target="_blank" rel="noopener noreferrer">reiyua.</a> All rights reserved.
       </div>
 
       {/* Contact Support Blurb */}
