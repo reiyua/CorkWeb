@@ -16,14 +16,17 @@ client.setEndpoint('https://cloud.appwrite.io/v1').setProject('66fff6c50032a76aa
 // Initialize Appwrite account object
 const account = new Account(client);
 
+// Import logo image
+import logo from './assets/corkweb_favicon.png'; // Replace with your logo filename
+
 function App() {
-  const [showLogin, setShowLogin] = useState(false);  // State to control login modal visibility
-  const [showSignUp, setShowSignUp] = useState(false); // State to control signup modal visibility
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState(''); // For Sign Up
-  const [errorMessage, setErrorMessage] = useState(''); // To display error messages
-  const [successMessage, setSuccessMessage] = useState(''); // To display success messages
+  const [username, setUsername] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleLogin = async () => {
     try {
@@ -52,6 +55,8 @@ function App() {
   return (
     <>
       <div className="container mt-5 text-center">
+        {/* Logo Above Title */}
+        <img src={logo} alt="CorkWeb Logo" className="mb-3" style={{ maxWidth: '200px' }} /> {/* Adjust maxWidth as needed */}
         <h1>CorkWeb</h1>
         <p>Your virtual corkboard for notes, ideas, and more.</p>
 
