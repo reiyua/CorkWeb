@@ -4,12 +4,17 @@ import { useState } from 'react';
 // Import CSS and Bootstrap
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Alert } from 'react-bootstrap';
 
 // Appwrite import and credentials
-import { Client } from 'appwrite';
+import { Client, Account } from 'appwrite';
+
+// Initialize Appwrite client
 const client = new Client();
 client.setEndpoint('https://cloud.appwrite.io/v1').setProject('66fff6c50032a76aa298');
+
+// Initialize Appwrite account object
+const account = new Account(client);
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);  // State to control login modal visibility
@@ -17,17 +22,31 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState(''); // For Sign Up
+  const [errorMessage, setErrorMessage] = useState(''); // To display error messages
+  const [successMessage, setSuccessMessage] = useState(''); // To display success messages
 
-  const handleLogin = () => {
-    // Handle login logic (connect with Appwrite)
-    console.log('Logging in with:', email, password);
-    setShowLogin(false);
+  const handleLogin = async () => {
+    try {
+      await account.createEmailSession(email, password);
+      setSuccessMessage('Login successful!');
+      setErrorMessage('');
+      setShowLogin(false);
+    } catch (error) {
+      setErrorMessage(error.message);
+      setSuccessMessage('');
+    }
   };
 
-  const handleSignUp = () => {
-    // Handle sign-up logic (connect with Appwrite)
-    console.log('Signing up with:', username, email, password);
-    setShowSignUp(false);
+  const handleSignUp = async () => {
+    try {
+      await account.create('unique()', email, password, username);
+      setSuccessMessage('Sign up successful! You can now log in.');
+      setErrorMessage('');
+      setShowSignUp(false);
+    } catch (error) {
+      setErrorMessage(error.message);
+      setSuccessMessage('');
+    }
   };
 
   return (
@@ -35,6 +54,10 @@ function App() {
       <div className="container mt-5 text-center">
         <h1>CorkWeb</h1>
         <p>Your virtual corkboard for notes, ideas, and more.</p>
+
+        {/* Display error or success messages */}
+        {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+        {successMessage && <Alert variant="success">{successMessage}</Alert>}
       </div>
 
       {/* Buttons to show login and sign-up popups */}
