@@ -48,3 +48,12 @@
   font-size: 0.8em;
   color: #555; /* Adjust color as needed */
 }
+
+
+.contact-support {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  color: #6c757d; /* Use a light color for better visibility */
+  font-size: 0.9em; /* Slightly smaller font size */
+}

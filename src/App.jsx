@@ -157,6 +157,11 @@ function App() {
       <div className="copyright">
         <p>&copy; 2024 reiyua. All rights reserved.</p>
       </div>
+
+      {/* Contact Support Blurb */}
+      <div className="contact-support">
+        <p>Contact support: corkweb@googlegroups.com</p>
+      </div>
     </>
   );
 }
