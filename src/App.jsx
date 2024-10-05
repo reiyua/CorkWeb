@@ -1,7 +1,5 @@
 // Import necessary hooks and assets
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 
 // Import CSS and Bootstrap
 import './App.css';
@@ -14,7 +12,6 @@ const client = new Client();
 client.setEndpoint('https://cloud.appwrite.io/v1').setProject('66fff6c50032a76aa298');
 
 function App() {
-  const [count, setCount] = useState(0);
   const [showLogin, setShowLogin] = useState(false); // State to control modal visibility
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,28 +25,17 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="container mt-5 text-center">
+        <h1>CorkWeb</h1>
+        <p>Your virtual corkboard for notes, ideas, and more.</p>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>Edit <code>src/App.jsx</code> and save to test HMR</p>
-      </div>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
 
       {/* Button to show login popup */}
-      <Button variant="primary" onClick={() => setShowLogin(true)}>
-        Login
-      </Button>
+      <div className="text-center mt-4">
+        <Button variant="primary" onClick={() => setShowLogin(true)}>
+          Login
+        </Button>
+      </div>
 
       {/* React-Bootstrap Login Modal */}
       <Modal show={showLogin} onHide={() => setShowLogin(false)}>
