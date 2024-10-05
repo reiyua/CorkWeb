@@ -40,3 +40,11 @@
 .read-the-docs {
   color: #888;
 }
+
+.copyright {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.8em;
+  color: #555; /* Adjust color as needed */
+}

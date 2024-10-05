@@ -56,7 +56,7 @@ function App() {
     <>
       <div className="container mt-5 text-center">
         {/* Logo Above Title */}
-        <img src={logo} alt="CorkWeb Logo" className="mb-3" style={{ maxWidth: '200px' }} /> {/* Adjust maxWidth as needed */}
+        <img src={logo} alt="CorkWeb Logo" className="mb-3" style={{ maxWidth: '200px' }} />
         <h1>CorkWeb</h1>
         <p>Your virtual corkboard for notes, ideas, and more.</p>
 
@@ -152,6 +152,11 @@ function App() {
           </Form>
         </Modal.Body>
       </Modal>
+
+      {/* Copyright Blurb */}
+      <div className="copyright">
+        <p>&copy; 2024 reiyua. All rights reserved.</p>
+      </div>
     </>
   );
 }
