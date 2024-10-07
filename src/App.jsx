@@ -33,17 +33,24 @@ function App() {
   const [successMessage, setSuccessMessage] = useState('');
 
 /// login component
-  const handleLogin = async () => {
-    try {
-        // Ensure correct method is used to create the session
-        await account.createSession(email, password); // Correct method
-        setSuccessMessage('Login successful!');
-        setErrorMessage('');
-        setShowLogin(false);
-    } catch (error) {
-        setErrorMessage(error.message);
-        setSuccessMessage('');
-    }
+const handleLogin = async () => {
+  if (!email || !password) {
+    setErrorMessage('Both email and password are required.');
+    return;
+  }
+
+  try {
+    // Attempt to create an email session (aka actually logging into user)
+    await account.createEmailSession(email, password);
+    setSuccessMessage('Login successful!');
+    setErrorMessage('');
+    setShowLogin(false);  // Close the login modal after success
+  } catch (error) {
+    // Log the error message for debugging
+    console.error('Login error:', error);
+    setErrorMessage(error.message || 'Login failed. Please check your credentials.');
+    setSuccessMessage('');
+  }
 };
 
 
