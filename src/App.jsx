@@ -28,10 +28,11 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
+
   const handleLogin = async () => {
     try {
         // Ensure correct method is used to create the session
-        await account.createEmailSession(email, password); // Correct method
+        await account.createSession(email, password); // Correct method
         setSuccessMessage('Login successful!');
         setErrorMessage('');
         setShowLogin(false);
