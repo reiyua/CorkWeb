@@ -30,15 +30,16 @@ function App() {
 
   const handleLogin = async () => {
     try {
-      await account.createEmailSession(email, password);
-      setSuccessMessage('Login successful!');
-      setErrorMessage('');
-      setShowLogin(false);
+        // Ensure correct method is used to create the session
+        await account.createEmailSession(email, password); // Correct method
+        setSuccessMessage('Login successful!');
+        setErrorMessage('');
+        setShowLogin(false);
     } catch (error) {
-      setErrorMessage(error.message);
-      setSuccessMessage('');
+        setErrorMessage(error.message);
+        setSuccessMessage('');
     }
-  };
+};
 
   const handleSignUp = async () => {
     try {
