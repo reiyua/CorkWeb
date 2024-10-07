@@ -6,7 +6,10 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 
-// Appwrite import and credentials
+// Import UUID Package as attempt to solve invalid user ID upon registering.
+import { v4 as uuidv4 } from 'uuid';
+
+// Appwrite import
 import { Client, Account } from 'appwrite';
 
 // Initialize Appwrite client
@@ -19,6 +22,7 @@ const account = new Account(client);
 // Import logo image
 import logo from './assets/corkweb_favicon.png'; // Replace with your logo filename
 
+/// declare variables
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -28,7 +32,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-
+/// login component
   const handleLogin = async () => {
     try {
         // Ensure correct method is used to create the session
@@ -42,21 +46,26 @@ function App() {
     }
 };
 
+
+// signup component
 const handleSignUp = async () => {
-  // Add basic validation for fields
+  // Basic validation for fields
   if (!email || !password || !username) {
     setErrorMessage('All fields are required.');
     return;
   }
 
+  // Generate a valid userId using UUID
+  const userId = uuidv4();
+
   try {
-    // Ensure 'unique()' is passed as a string to guarantee user ID meets Appwrite requirements.
-    await account.create('unique()', email, password, username);
+    // Use the generated userId instead of 'unique()'
+    await account.create(userId, email, password, username);
     setSuccessMessage('Sign up successful! You can now log in.');
     setErrorMessage('');
     setShowSignUp(false);
   } catch (error) {
-    // Display detailed error message
+    // Show a detailed error message
     setErrorMessage(error.message || 'An error occurred during sign up.');
     setSuccessMessage('');
   }
