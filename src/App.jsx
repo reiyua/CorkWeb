@@ -42,17 +42,17 @@ function App() {
     }
 };
 
-  const handleSignUp = async () => {
-    try {
-      await account.create('unique()', email, password, username);
-      setSuccessMessage('Sign up successful! You can now log in.');
-      setErrorMessage('');
-      setShowSignUp(false);
-    } catch (error) {
-      setErrorMessage(error.message);
-      setSuccessMessage('');
-    }
-  };
+const handleSignUp = async () => {
+  try {
+    await account.create('unique()', email, password, username); // Pass 'unique()' as a string
+    setSuccessMessage('Sign up successful! You can now log in.');
+    setErrorMessage('');
+    setShowSignUp(false);
+  } catch (error) {
+    setErrorMessage(error.message);
+    setSuccessMessage('');
+  }
+};
 
   return (
     <>
