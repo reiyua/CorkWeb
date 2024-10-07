@@ -43,16 +43,25 @@ function App() {
 };
 
 const handleSignUp = async () => {
+  // Add basic validation for fields
+  if (!email || !password || !username) {
+    setErrorMessage('All fields are required.');
+    return;
+  }
+
   try {
-    await account.create('unique()', email, password, username); // Pass 'unique()' as a string
+    // Ensure 'unique()' is passed as a string to guarantee user ID meets Appwrite requirements.
+    await account.create('unique()', email, password, username);
     setSuccessMessage('Sign up successful! You can now log in.');
     setErrorMessage('');
     setShowSignUp(false);
   } catch (error) {
-    setErrorMessage(error.message);
+    // Display detailed error message
+    setErrorMessage(error.message || 'An error occurred during sign up.');
     setSuccessMessage('');
   }
 };
+
 
   return (
     <>
