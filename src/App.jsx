@@ -1,17 +1,14 @@
-// Import necessary hooks and assets from React
+// Import necessary hooks and assets
 import { useState } from 'react';
 
 // Import Supabase client
 import { createClient } from '@supabase/supabase-js';
 
-// Import React-Router-Dom
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom'; // To handle redirects
-
 // Import CSS and Bootstrap
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
+
 
 
 // Initialize Supabase client
@@ -20,27 +17,8 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// import logo for corkweb.
 import logo from './assets/corkweb_favicon.png';
 
-// Import the web pages as components
-
-import AccountSettings from './pages/AccountSettings';
-import Dashboard from './pages/Dashboard';
-import HomePage from './pages/HomePage';
-
-
-// Home page component
-const app = () => {
-  return (
-    <div className="container text-center mt-5">
-      <h2>Welcome to CorkWeb!</h2>
-      <p>This is your home page after successful login.</p>
-    </div>
-  );
-};
-
-//define login and signup variables
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -49,12 +27,11 @@ function App() {
   const [username, setUsername] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const navigate = useNavigate(); // To handle redirect
 
   // Sign-up function
   const handleSignUp = async () => {
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -73,7 +50,7 @@ function App() {
     }
   };
 
-  // Login function with redirect
+  // Login function
   const handleLogin = async () => {
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -86,8 +63,6 @@ function App() {
       } else {
         setSuccessMessage('Login successful!');
         setShowLogin(false);
-        // Redirect to the home page after successful login
-        navigate('/dashboard'); // Redirect to the dashboard where user will see their corkboards
       }
     } catch (error) {
       setErrorMessage(error.message);
@@ -95,7 +70,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <>
       <div className="container mt-5 text-center">
         {/* Logo Above Title */}
         <img src={logo} alt="CorkWeb Logo" className="mb-3" style={{ maxWidth: '200px' }} />
@@ -195,13 +170,6 @@ function App() {
         </Modal.Body>
       </Modal>
 
-      {/* Define routes */}
-      <Routes>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/dashboard" element={<CorkBoard />} />
-        <Route path="/account-settings" element={<AccountSettings />} />
-      </Routes>
-
       {/* Copyright Blurb */}
       <div className="copyright">
         &copy; <a href="https://reiyua.lol" target="_blank" rel="noopener noreferrer">reiyua.</a> All rights reserved.
@@ -209,9 +177,9 @@ function App() {
 
       {/* Contact Support Blurb */}
       <div className="contact-support">
-        <p>Contact support: rei@reiyua.lol</p>
+        <p>Contact support: corkweb@googlegroups.com</p>
       </div>
-    </Router>
+    </>
   );
 }
 
