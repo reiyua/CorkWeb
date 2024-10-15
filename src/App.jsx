@@ -6,7 +6,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 
-// Import UUID Package as attempt to solve invalid user ID upon registering.
+// Import UUID Package
 import { v4 as uuidv4 } from 'uuid';
 
 // Appwrite import
@@ -22,7 +22,7 @@ const account = new Account(client);
 // Import logo image
 import logo from './assets/corkweb_favicon.png'; // Replace with your logo filename
 
-/// declare variables
+// Main App Component
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -32,61 +32,51 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-/// login component
-const handleLogin = async () => {
-  try {
-    // Use createEmailSession method
-    await account.createEmailSession(email, password);
-    setSuccessMessage('Login successful!');
-    setErrorMessage('');
-    setShowLogin(false);
-  } catch (error) {
-    setErrorMessage(error.message);
-    setSuccessMessage('');
-  }
-};
+  // Correct handleLogin function
+  const handleLogin = async () => {
+    try {
+      // Ensure correct method is used to create the session
+      await account.createEmailSession(email, password); // Correct method
+      setSuccessMessage('Login successful!');
+      setErrorMessage('');
+      setShowLogin(false);
+    } catch (error) {
+      setErrorMessage(error.message);
+      setSuccessMessage('');
+    }
+  };
 
+  // Correct handleSignUp function
+  const handleSignUp = async () => {
+    if (!email || !password || !username) {
+      setErrorMessage('All fields are required.');
+      return;
+    }
 
+    const userId = uuidv4();
 
-// signup component
-const handleSignUp = async () => {
-  // Basic validation for fields
-  if (!email || !password || !username) {
-    setErrorMessage('All fields are required.');
-    return;
-  }
-
-  // Generate a valid userId using UUID
-  const userId = uuidv4();
-
-  try {
-    // Use the generated userId instead of 'unique()'
-    await account.create(userId, email, password, username);
-    setSuccessMessage('Sign up successful! You can now log in.');
-    setErrorMessage('');
-    setShowSignUp(false);
-  } catch (error) {
-    // Show a detailed error message
-    setErrorMessage(error.message || 'An error occurred during sign up.');
-    setSuccessMessage('');
-  }
-};
-
+    try {
+      await account.create(userId, email, password, username);
+      setSuccessMessage('Sign up successful! You can now log in.');
+      setErrorMessage('');
+      setShowSignUp(false);
+    } catch (error) {
+      setErrorMessage(error.message || 'An error occurred during sign up.');
+      setSuccessMessage('');
+    }
+  };
 
   return (
     <>
       <div className="container mt-5 text-center">
-        {/* Logo Above Title */}
         <img src={logo} alt="CorkWeb Logo" className="mb-3" style={{ maxWidth: '200px' }} />
         <h1>CorkWeb</h1>
         <p>Your virtual corkboard for notes, ideas, and more.</p>
 
-        {/* Display error or success messages */}
         {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
         {successMessage && <Alert variant="success">{successMessage}</Alert>}
       </div>
 
-      {/* Buttons to show login and sign-up popups */}
       <div className="text-center mt-4">
         <Button variant="primary" className="me-3" onClick={() => setShowLogin(true)}>
           Login
@@ -174,12 +164,10 @@ const handleSignUp = async () => {
         </Modal.Body>
       </Modal>
 
-      {/* Copyright Blurb */}
       <div className="copyright">
         &copy; <a href="https://reiyua.lol" target="_blank" rel="noopener noreferrer">reiyua.</a> All rights reserved.
       </div>
 
-      {/* Contact Support Blurb */}
       <div className="contact-support">
         <p>Contact support: corkweb@googlegroups.com</p>
       </div>
