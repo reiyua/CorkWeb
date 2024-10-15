@@ -1,11 +1,24 @@
 // Import necessary hooks and assets
 import { useState } from 'react';
+
+// Import Supabase client
+import { createClient } from '@supabase/supabase-js';
+
+// Import CSS and Bootstrap
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
+
+// Import UUID Package for user ID
 import { v4 as uuidv4 } from 'uuid';
 
-// Main App Component
+// Initialize Supabase client
+const supabaseUrl = 'https://your-supabase-url.supabase.co'; // Replace with your actual Supabase URL
+const supabaseKey = 'your-supabase-anon-key'; // Replace with your actual Supabase anon key
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+import logo from './assets/corkweb_favicon.png'; // Replace with your logo filename
+
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -15,50 +28,63 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  // Correct handleLogin function
-  const handleLogin = async () => {
+  // Sign-up function
+  const handleSignUp = async () => {
     try {
-      // Correct method to create session
-      await account.createEmailSession(email, password);
-      setSuccessMessage('Login successful!');
-      setErrorMessage('');
-      setShowLogin(false);
+      // Supabase's sign-up method
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { username }
+        }
+      });
+
+      if (error) {
+        setErrorMessage(error.message);
+      } else {
+        setSuccessMessage('Sign up successful! You can now log in.');
+        setShowSignUp(false);
+      }
     } catch (error) {
       setErrorMessage(error.message);
-      setSuccessMessage('');
     }
   };
 
-  // Correct handleSignUp function
-  const handleSignUp = async () => {
-    if (!email || !password || !username) {
-      setErrorMessage('All fields are required.');
-      return;
-    }
-
-    const userId = uuidv4();
-
+  // Login function
+  const handleLogin = async () => {
     try {
-      await account.create(userId, email, password, username);
-      setSuccessMessage('Sign up successful! You can now log in.');
-      setErrorMessage('');
-      setShowSignUp(false);
+      // Supabase's login method
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        setErrorMessage(error.message);
+      } else {
+        setSuccessMessage('Login successful!');
+        setShowLogin(false);
+      }
     } catch (error) {
-      setErrorMessage(error.message || 'An error occurred during sign up.');
-      setSuccessMessage('');
+      setErrorMessage(error.message);
     }
   };
 
   return (
     <>
       <div className="container mt-5 text-center">
+        {/* Logo Above Title */}
+        <img src={logo} alt="CorkWeb Logo" className="mb-3" style={{ maxWidth: '200px' }} />
         <h1>CorkWeb</h1>
         <p>Your virtual corkboard for notes, ideas, and more.</p>
 
+        {/* Display error or success messages */}
         {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
         {successMessage && <Alert variant="success">{successMessage}</Alert>}
       </div>
 
+      {/* Buttons to show login and sign-up popups */}
       <div className="text-center mt-4">
         <Button variant="primary" className="me-3" onClick={() => setShowLogin(true)}>
           Login
@@ -146,10 +172,12 @@ function App() {
         </Modal.Body>
       </Modal>
 
+      {/* Copyright Blurb */}
       <div className="copyright">
         &copy; <a href="https://reiyua.lol" target="_blank" rel="noopener noreferrer">reiyua.</a> All rights reserved.
       </div>
 
+      {/* Contact Support Blurb */}
       <div className="contact-support">
         <p>Contact support: corkweb@googlegroups.com</p>
       </div>
