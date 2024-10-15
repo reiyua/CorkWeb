@@ -33,18 +33,19 @@ function App() {
   const [successMessage, setSuccessMessage] = useState('');
 
 /// login component
-  const handleLogin = async () => {
-    try {
-        // Ensure correct method is used to create the session
-        await account.createSession(email, password); // Correct method
-        setSuccessMessage('Login successful!');
-        setErrorMessage('');
-        setShowLogin(false);
-    } catch (error) {
-        setErrorMessage(error.message);
-        setSuccessMessage('');
-    }
+const handleLogin = async () => {
+  try {
+    // Use createEmailSession method
+    await account.createEmailSession(email, password);
+    setSuccessMessage('Login successful!');
+    setErrorMessage('');
+    setShowLogin(false);
+  } catch (error) {
+    setErrorMessage(error.message);
+    setSuccessMessage('');
+  }
 };
+
 
 
 // signup component
