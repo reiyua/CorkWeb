@@ -9,8 +9,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 
-// Import UUID Package for user ID
-import { v4 as uuidv4 } from 'uuid';
+
 
 // Initialize Supabase client
 const supabaseUrl = 'https://ujnvmsetxqxvggfgwjii.supabase.co';
