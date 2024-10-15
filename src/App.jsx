@@ -208,7 +208,7 @@ function App() {
 
       {/* Contact Support Blurb */}
       <div className="contact-support">
-        <p>Contact support: corkweb@googlegroups.com</p>
+        <p>Contact support: rei@reiyua.lol</p>
       </div>
     </Router>
   );
