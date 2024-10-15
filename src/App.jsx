@@ -4,14 +4,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { Client, Account } from 'appwrite';
-
-// Initialize Appwrite client
-const client = new Client();
-client.setEndpoint('https://cloud.appwrite.io/v1').setProject('66fff6c50032a76aa298');
-
-// Initialize Appwrite account object
-const account = new Account(client);
 
 // Main App Component
 function App() {
