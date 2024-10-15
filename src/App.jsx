@@ -24,13 +24,14 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 import logo from './assets/corkweb_favicon.png';
 
 // Import the web pages as components
-import HomePage from './HomePage';
-import AccountSettings from './AccountSettings';
-import Dashboard from './Dashboard';
+
+import AccountSettings from './pages/AccountSettings';
+import Dashboard from './pages/Dashboard';
+import HomePage from './pages/HomePage';
 
 
 // Home page component
-const HomePage = () => {
+const app = () => {
   return (
     <div className="container text-center mt-5">
       <h2>Welcome to CorkWeb!</h2>
