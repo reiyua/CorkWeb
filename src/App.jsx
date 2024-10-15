@@ -13,11 +13,12 @@ import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
 // Initialize Supabase client
-const supabaseUrl = 'https://your-supabase-url.supabase.co'; // Replace with your actual Supabase URL
-const supabaseKey = 'your-supabase-anon-key'; // Replace with your actual Supabase anon key
+const supabaseUrl = 'https://ujnvmsetxqxvggfgwjii.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVqbnZtc2V0eHF4dmdnZmd3amlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg5NzE4MDAsImV4cCI6MjA0NDU0NzgwMH0.0S2crPvr6XBG359FFWoIFZZrCY8QVL8CoNG7meyF5lc';
+
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-import logo from './assets/corkweb_favicon.png'; // Replace with your logo filename
+import logo from './assets/corkweb_favicon.png';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -31,8 +32,7 @@ function App() {
   // Sign-up function
   const handleSignUp = async () => {
     try {
-      // Supabase's sign-up method
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -54,7 +54,6 @@ function App() {
   // Login function
   const handleLogin = async () => {
     try {
-      // Supabase's login method
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password
