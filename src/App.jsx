@@ -1,15 +1,9 @@
 // Import necessary hooks and assets
 import { useState } from 'react';
-
-// Import CSS and Bootstrap
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
-
-// Import UUID Package
 import { v4 as uuidv4 } from 'uuid';
-
-// Appwrite import
 import { Client, Account } from 'appwrite';
 
 // Initialize Appwrite client
@@ -18,9 +12,6 @@ client.setEndpoint('https://cloud.appwrite.io/v1').setProject('66fff6c50032a76aa
 
 // Initialize Appwrite account object
 const account = new Account(client);
-
-// Import logo image
-import logo from './assets/corkweb_favicon.png'; // Replace with your logo filename
 
 // Main App Component
 function App() {
@@ -35,8 +26,8 @@ function App() {
   // Correct handleLogin function
   const handleLogin = async () => {
     try {
-      // Ensure correct method is used to create the session
-      await account.createEmailSession(email, password); // Correct method
+      // Correct method to create session
+      await account.createEmailSession(email, password);
       setSuccessMessage('Login successful!');
       setErrorMessage('');
       setShowLogin(false);
@@ -69,7 +60,6 @@ function App() {
   return (
     <>
       <div className="container mt-5 text-center">
-        <img src={logo} alt="CorkWeb Logo" className="mb-3" style={{ maxWidth: '200px' }} />
         <h1>CorkWeb</h1>
         <p>Your virtual corkboard for notes, ideas, and more.</p>
 
