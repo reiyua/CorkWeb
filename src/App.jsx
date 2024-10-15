@@ -23,6 +23,11 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // import logo for corkweb.
 import logo from './assets/corkweb_favicon.png';
 
+// Import the web pages as components
+import HomePage from './HomePage';
+import AccountSettings from './AccountSettings';
+import Dashboard from './Dashboard';
+
 
 // Home page component
 const HomePage = () => {
@@ -81,7 +86,7 @@ function App() {
         setSuccessMessage('Login successful!');
         setShowLogin(false);
         // Redirect to the home page after successful login
-        navigate('/home');
+        navigate('/dashboard'); // Redirect to the dashboard where user will see their corkboards
       }
     } catch (error) {
       setErrorMessage(error.message);
@@ -192,7 +197,8 @@ function App() {
       {/* Define routes */}
       <Routes>
         <Route path="/home" element={<HomePage />} />
-        <Route path="/corkboard" element={<CorkBoard />} />
+        <Route path="/dashboard" element={<CorkBoard />} />
+        <Route path="/account-settings" element={<AccountSettings />} />
       </Routes>
 
       {/* Copyright Blurb */}
