@@ -1,4 +1,4 @@
-// Import necessary hooks and assets
+// Import necessary hooks and assets from React
 import { useState } from 'react';
 
 // Import Supabase client
@@ -10,15 +10,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 
 
-
 // Initialize Supabase client
 const supabaseUrl = 'https://ujnvmsetxqxvggfgwjii.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVqbnZtc2V0eHF4dmdnZmd3amlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg5NzE4MDAsImV4cCI6MjA0NDU0NzgwMH0.0S2crPvr6XBG359FFWoIFZZrCY8QVL8CoNG7meyF5lc';
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// import logo for corkweb.
 import logo from './assets/corkweb_favicon.png';
 
+
+// create constant variables for authentication
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
