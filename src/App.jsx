@@ -4,6 +4,10 @@ import { useState } from 'react';
 // Import Supabase client
 import { createClient } from '@supabase/supabase-js';
 
+// Import React-Router-Dom
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // To handle redirects
+
 // Import CSS and Bootstrap
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,7 +24,17 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 import logo from './assets/corkweb_favicon.png';
 
 
-// create constant variables for authentication
+// Home page component
+const HomePage = () => {
+  return (
+    <div className="container text-center mt-5">
+      <h2>Welcome to CorkWeb!</h2>
+      <p>This is your home page after successful login.</p>
+    </div>
+  );
+};
+
+//define login and signup variables
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -29,11 +43,12 @@ function App() {
   const [username, setUsername] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate(); // To handle redirect
 
   // Sign-up function
   const handleSignUp = async () => {
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -52,7 +67,7 @@ function App() {
     }
   };
 
-  // Login function
+  // Login function with redirect
   const handleLogin = async () => {
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -65,6 +80,8 @@ function App() {
       } else {
         setSuccessMessage('Login successful!');
         setShowLogin(false);
+        // Redirect to the home page after successful login
+        navigate('/home');
       }
     } catch (error) {
       setErrorMessage(error.message);
@@ -72,7 +89,7 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
       <div className="container mt-5 text-center">
         {/* Logo Above Title */}
         <img src={logo} alt="CorkWeb Logo" className="mb-3" style={{ maxWidth: '200px' }} />
@@ -172,6 +189,12 @@ function App() {
         </Modal.Body>
       </Modal>
 
+      {/* Define routes */}
+      <Routes>
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/corkboard" element={<CorkBoard />} />
+      </Routes>
+
       {/* Copyright Blurb */}
       <div className="copyright">
         &copy; <a href="https://reiyua.lol" target="_blank" rel="noopener noreferrer">reiyua.</a> All rights reserved.
@@ -181,7 +204,7 @@ function App() {
       <div className="contact-support">
         <p>Contact support: corkweb@googlegroups.com</p>
       </div>
-    </>
+    </Router>
   );
 }
 
