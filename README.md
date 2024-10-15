@@ -3,7 +3,7 @@ Cork board maker website which allows you to create a board to store images and 
 
 It will have a crime scene kind of look, allowing you to tie things together aswell (ROUGH DESCRIPTION DRAFT)
 
-Uses Vite + React for the website itelf, Netlify for web hosting and Appwrite for the database.
+Uses Vite + React for the website itelf, Netlify for web hosting and Supabase for the database.
 
 Email corkweb@googlegroups.com for support.
 
@@ -11,7 +11,6 @@ https://corkweb.netlify.app/
 
 REMOVE WHEN COMPLETE:
 
-cd vite-project
   npm install
   npm run dev
 
